@@ -14,7 +14,7 @@
 *  limitations under the License.
 ********************************************************************************/
 
-package ledger_cosmos_go
+package ledger_xar_go
 
 import (
 	"crypto/sha256"
@@ -30,7 +30,7 @@ import (
 // Ledger Test Mnemonic: equip will roof matter pink blind book anxiety banner elbow sun young
 
 func Test_UserFindLedger(t *testing.T) {
-	userApp, err := FindLedgerCosmosUserApp()
+	userApp, err := FindLedgerXARApp()
 	if err != nil {
 		t.Fatalf(err.Error())
 	}
@@ -40,7 +40,7 @@ func Test_UserFindLedger(t *testing.T) {
 }
 
 func Test_UserGetVersion(t *testing.T) {
-	userApp, err := FindLedgerCosmosUserApp()
+	userApp, err := FindLedgerXARApp()
 	if err != nil {
 		t.Fatalf(err.Error())
 	}
@@ -59,7 +59,7 @@ func Test_UserGetVersion(t *testing.T) {
 }
 
 func Test_UserGetPublicKey(t *testing.T) {
-	userApp, err := FindLedgerCosmosUserApp()
+	userApp, err := FindLedgerXARApp()
 	if err != nil {
 		t.Fatalf(err.Error())
 	}
@@ -67,7 +67,7 @@ func Test_UserGetPublicKey(t *testing.T) {
 
 	userApp.api.Logging = true
 
-	path := []uint32{44, 118, 5, 0, 21}
+	path := []uint32{44, 463, 5, 0, 21}
 
 	pubKey, err := userApp.GetPublicKeySECP256K1(path)
 	if err != nil {
@@ -85,7 +85,7 @@ func Test_UserGetPublicKey(t *testing.T) {
 }
 
 func Test_GetAddressPubKeySECP256K1_Zero(t *testing.T) {
-	userApp, err := FindLedgerCosmosUserApp()
+	userApp, err := FindLedgerXARApp()
 	if err != nil {
 		t.Fatalf(err.Error())
 	}
@@ -93,8 +93,8 @@ func Test_GetAddressPubKeySECP256K1_Zero(t *testing.T) {
 
 	userApp.api.Logging = true
 
-	hrp := "cosmos"
-	path := []uint32{44, 118, 0, 0, 0}
+	hrp := "xar"
+	path := []uint32{44, 0x1cf, 0, 0, 0}
 
 	pubKey, addr, err := userApp.GetAddressPubKeySECP256K1(path, hrp)
 	if err != nil {
@@ -111,7 +111,7 @@ func Test_GetAddressPubKeySECP256K1_Zero(t *testing.T) {
 }
 
 func Test_GetAddressPubKeySECP256K1(t *testing.T) {
-	userApp, err := FindLedgerCosmosUserApp()
+	userApp, err := FindLedgerXARApp()
 	if err != nil {
 		t.Fatalf(err.Error())
 	}
@@ -119,8 +119,8 @@ func Test_GetAddressPubKeySECP256K1(t *testing.T) {
 
 	userApp.api.Logging = true
 
-	hrp := "cosmos"
-	path := []uint32{44, 118, 5, 0, 21}
+	hrp := "xar"
+	path := []uint32{44, 0x1cf, 5, 0, 21}
 
 	pubKey, addr, err := userApp.GetAddressPubKeySECP256K1(path, hrp)
 	if err != nil {
@@ -137,7 +137,7 @@ func Test_GetAddressPubKeySECP256K1(t *testing.T) {
 }
 
 func Test_UserPK_HDPaths(t *testing.T) {
-	userApp, err := FindLedgerCosmosUserApp()
+	userApp, err := FindLedgerXARApp()
 	if err != nil {
 		t.Fatalf(err.Error())
 	}
@@ -145,7 +145,7 @@ func Test_UserPK_HDPaths(t *testing.T) {
 
 	userApp.api.Logging = true
 
-	path := []uint32{44, 118, 0, 0, 0}
+	path := []uint32{44, 0x1cf, 0, 0, 0}
 
 	expected := []string{
 		"034fef9cd7c4c63588d3b03feb5281b9d232cba34d6f3d71aee59211ffbfe1fe87",
@@ -178,7 +178,7 @@ func Test_UserPK_HDPaths(t *testing.T) {
 			t,
 			expected[i],
 			hex.EncodeToString(pubKey),
-			"Public key 44'/118'/0'/0/%d does not match\n", i)
+			"Public key 44'/463'/0'/0/%d does not match\n", i)
 
 		_, err = btcec.ParsePubKey(pubKey[:], btcec.S256())
 		require.Nil(t, err, "Error parsing public key err: %s\n", err)
@@ -206,7 +206,7 @@ func getDummyTx() []byte {
 }
 
 func Test_UserSign(t *testing.T) {
-	userApp, err := FindLedgerCosmosUserApp()
+	userApp, err := FindLedgerXARApp()
 	if err != nil {
 		t.Fatalf(err.Error())
 	}
@@ -214,7 +214,7 @@ func Test_UserSign(t *testing.T) {
 
 	userApp.api.Logging = true
 
-	path := []uint32{44, 118, 0, 0, 5}
+	path := []uint32{44, 463, 0, 0, 5}
 
 	message := getDummyTx()
 	signature, err := userApp.SignSECP256K1(path, message)
@@ -254,7 +254,7 @@ func Test_UserSign(t *testing.T) {
 }
 
 func Test_UserSign_Fails(t *testing.T) {
-	userApp, err := FindLedgerCosmosUserApp()
+	userApp, err := FindLedgerXARApp()
 	if err != nil {
 		t.Fatalf(err.Error())
 	}
@@ -262,7 +262,7 @@ func Test_UserSign_Fails(t *testing.T) {
 
 	userApp.api.Logging = true
 
-	path := []uint32{44, 118, 0, 0, 5}
+	path := []uint32{44, 463, 0, 0, 5}
 
 	message := getDummyTx()
 	garbage := []byte{65}

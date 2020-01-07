@@ -14,7 +14,7 @@
 *  limitations under the License.
 ********************************************************************************/
 
-package ledger_cosmos_go
+package ledger_xar_go
 
 import (
 	"fmt"
@@ -53,7 +53,7 @@ func Test_PathGeneration0(t *testing.T) {
 }
 
 func Test_PathGeneration2(t *testing.T) {
-	bip32Path := []uint32{44, 118, 0, 0, 0}
+	bip32Path := []uint32{44, 463, 0, 0, 0}
 
 	pathBytes, err := GetBip32bytesv1(bip32Path, 2)
 
@@ -77,7 +77,7 @@ func Test_PathGeneration2(t *testing.T) {
 }
 
 func Test_PathGeneration3(t *testing.T) {
-	bip32Path := []uint32{44, 118, 0, 0, 0}
+	bip32Path := []uint32{44, 463, 0, 0, 0}
 
 	pathBytes, err := GetBip32bytesv1(bip32Path, 3)
 
@@ -125,7 +125,7 @@ func Test_PathGeneration0v2(t *testing.T) {
 }
 
 func Test_PathGeneration2v2(t *testing.T) {
-	bip32Path := []uint32{44, 118, 0, 0, 0}
+	bip32Path := []uint32{44, 463, 0, 0, 0}
 
 	pathBytes, err := GetBip32bytesv2(bip32Path, 2)
 
@@ -149,7 +149,7 @@ func Test_PathGeneration2v2(t *testing.T) {
 }
 
 func Test_PathGeneration3v2(t *testing.T) {
-	bip32Path := []uint32{44, 118, 0, 0, 0}
+	bip32Path := []uint32{44, 463, 0, 0, 0}
 
 	pathBytes, err := GetBip32bytesv2(bip32Path, 3)
 
