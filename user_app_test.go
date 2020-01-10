@@ -51,11 +51,6 @@ func Test_UserGetVersion(t *testing.T) {
 	version, err := userApp.GetVersion()
 	require.Nil(t, err, "Detected error")
 	fmt.Println(version)
-
-	assert.Equal(t, uint8(0x0), version.AppMode, "TESTING MODE ENABLED!!")
-	assert.Equal(t, uint8(0x2), version.Major, "Wrong Major version")
-	assert.Equal(t, uint8(0x1), version.Minor, "Wrong Minor version")
-	assert.Equal(t, uint8(0x0), version.Patch, "Wrong Patch version")
 }
 
 func Test_UserGetPublicKey(t *testing.T) {
@@ -79,7 +74,7 @@ func Test_UserGetPublicKey(t *testing.T) {
 	fmt.Printf("PUBLIC KEY: %x\n", pubKey)
 
 	assert.Equal(t,
-		"03cb5a33c61595206294140c45efa8a817533e31aa05ea18343033a0732a677005",
+		"0353e8261cb89ccc43261639292e49fd3db38d5d46590fd715eb53fde252e7941b",
 		hex.EncodeToString(pubKey),
 		"Unexpected pubkey")
 }
@@ -106,8 +101,8 @@ func Test_GetAddressPubKeySECP256K1_Zero(t *testing.T) {
 
 	assert.Equal(t, 33, len(pubKey), "Public key has wrong length: %x, expected length: %x\n", pubKey, 65)
 
-	assert.Equal(t, "034fef9cd7c4c63588d3b03feb5281b9d232cba34d6f3d71aee59211ffbfe1fe87", hex.EncodeToString(pubKey), "Unexpected pubkey")
-	assert.Equal(t, "cosmos1w34k53py5v5xyluazqpq65agyajavep2rflq6h", addr, "Unexpected addr")
+	assert.Equal(t, "03e33e4e79dcd0bbfacf73637172cbfc93a2939a74041e86ed7a8ac31bcd8474b9", hex.EncodeToString(pubKey), "Unexpected pubkey")
+	assert.Equal(t, "xar1v8n4etx23j3jsyykmx0mzd73dr47fr494h3ft2", addr, "Unexpected addr")
 }
 
 func Test_GetAddressPubKeySECP256K1(t *testing.T) {
@@ -132,8 +127,8 @@ func Test_GetAddressPubKeySECP256K1(t *testing.T) {
 
 	assert.Equal(t, 33, len(pubKey), "Public key has wrong length: %x, expected length: %x\n", pubKey, 65)
 
-	assert.Equal(t, "03cb5a33c61595206294140c45efa8a817533e31aa05ea18343033a0732a677005", hex.EncodeToString(pubKey), "Unexpected pubkey")
-	assert.Equal(t, "cosmos162zm3k8mc685592d7vej2lxrp58mgmkcec76d6", addr, "Unexpected addr")
+	assert.Equal(t, "0353e8261cb89ccc43261639292e49fd3db38d5d46590fd715eb53fde252e7941b", hex.EncodeToString(pubKey), "Unexpected pubkey")
+	assert.Equal(t, "xar1ke235ek9lta603ud6l58xhdgd8s7u9ddtlrndm", addr, "Unexpected addr")
 }
 
 func Test_UserPK_HDPaths(t *testing.T) {
@@ -148,16 +143,16 @@ func Test_UserPK_HDPaths(t *testing.T) {
 	path := []uint32{44, 0x1cf, 0, 0, 0}
 
 	expected := []string{
-		"034fef9cd7c4c63588d3b03feb5281b9d232cba34d6f3d71aee59211ffbfe1fe87",
-		"0260d0487a3dfce9228eee2d0d83a40f6131f551526c8e52066fe7fe1e4a509666",
-		"03a2670393d02b162d0ed06a08041e80d86be36c0564335254df7462447eb69ab3",
-		"033222fc61795077791665544a90740e8ead638a391a3b8f9261f4a226b396c042",
-		"03f577473348d7b01e7af2f245e36b98d181bc935ec8b552cde5932b646dc7be04",
-		"0222b1a5486be0a2d5f3c5866be46e05d1bde8cda5ea1c4c77a9bc48d2fa2753bc",
-		"0377a1c826d3a03ca4ee94fc4dea6bccb2bac5f2ac0419a128c29f8e88f1ff295a",
-		"031b75c84453935ab76f8c8d0b6566c3fcc101cc5c59d7000bfc9101961e9308d9",
-		"038905a42433b1d677cc8afd36861430b9a8529171b0616f733659f131c3f80221",
-		"038be7f348902d8c20bc88d32294f4f3b819284548122229decd1adf1a7eb0848b",
+		"03e33e4e79dcd0bbfacf73637172cbfc93a2939a74041e86ed7a8ac31bcd8474b9",
+		"037c1a78d950204e2338ff4b590e241c4b4fc9a57583ab575e2cec87c3b5b72023",
+		"03e82b4a69891f5badcfe61c34cbc793d08f854336d7703a96e1749a167fded306",
+		"03dfbfe232818e20182c47063046f89070919357023cc3ed4d89bf994972b680b9",
+		"03bf7170640356ee774ca053d1ae515e60b10da4ec9b5688affd163d1db221e053",
+		"02e68a8151530abb77c975f3a772454ebdfbf6e434adf97f0f172773729f823a3e",
+		"0376c21fb20fd79599b5de159feb94200342e15564487c6ab6034c2d41e3c7b49b",
+		"03b327e59ebd5418ae4fc4ab18135c8576bec7041da964e5285606144692bc7b0e",
+		"0273581b27695952cb6b878962a89ed9a0cda17f7ee628a04ab078689508acdb49",
+		"028a32ce1c538357d062e49301d84b8a836c67e734ac692fd6a352e1a32ba38fc7",
 	}
 
 	for i := uint32(0); i < 10; i++ {
